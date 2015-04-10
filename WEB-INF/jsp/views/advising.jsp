@@ -1,7 +1,18 @@
 <jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
 <% ArrayList<String> array = (ArrayList<String>)session.getAttribute("advisors");
-	if (array != null){ %>	    		
+	if (array != null){ %>	 
+
+
 <div class="container">
+    <h3> <font color="#e67e22">Select Department</font></h3>
+    <br>
+    <select id="drp_button" class="btn btn-default btn-lg dropdown-toggle">
+    <option value="CSE">CSE</option>
+    <option value="MAE">MAE</option>
+    <option value="ARCH">ARCH</option>
+    <option value="MATH">MATH</option>
+    </select>
+    <br>
 	<div class="page-header">
 		<div class="pull-right form-inline">
 			<div class="btn-group">
