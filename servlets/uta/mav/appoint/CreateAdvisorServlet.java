@@ -58,6 +58,13 @@ public class CreateAdvisorServlet extends HttpServlet{
 			CreateAdvisorBean ca = new CreateAdvisorBean();
 			ca.setEmail(request.getParameter("emailAddress"));
 			ca.setPname(request.getParameter("pname"));
+			
+			String role = "advisor";
+			System.out.print(request.getParameter("isLead"));
+			if(request.getParameter("isLead").equals("True"))
+				role = "lead_advisor";
+			ca.setRole(role);
+			
 			Visitor v = new CreateAdvisorVisitor();
 			user.accept(v,ca);
 			String msg = user.getMsg();

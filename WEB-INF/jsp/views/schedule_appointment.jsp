@@ -1,35 +1,42 @@
 <jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
-<%@ page import= "uta.mav.appoint.login.LoginUser" %>
-			<%@ page import= "uta.mav.appoint.login.AdminUser" %>
-			<%@ page import= "uta.mav.appoint.login.AdvisorUser" %>
-			<%@ page import= "uta.mav.appoint.login.StudentUser" %>
-			<%@ page import= "uta.mav.appoint.login.FacultyUser" %>
-			
-			<% LoginUser user = (LoginUser)session.getAttribute("user"); %>
-		<div class="input-group-btn">
-		<%@ page import= "uta.mav.appoint.beans.AppointmentType" %>
-		<% ArrayList<AppointmentType> ats = (ArrayList<AppointmentType>)session.getAttribute("appointmenttypes");
+<%@ page import="uta.mav.appoint.login.LoginUser"%>
+<%@ page import="uta.mav.appoint.login.AdminUser"%>
+<%@ page import="uta.mav.appoint.login.AdvisorUser"%>
+<%@ page import="uta.mav.appoint.login.StudentUser"%>
+<%@ page import="uta.mav.appoint.login.FacultyUser"%>
+
+<% LoginUser user = (LoginUser)session.getAttribute("user"); %>
+<div class="input-group-btn">
+	<%@ page import="uta.mav.appoint.beans.AppointmentType"%>
+	<% ArrayList<AppointmentType> ats = (ArrayList<AppointmentType>)session.getAttribute("appointmenttypes");
 		if (ats != null){%>
-			<button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
-			Select Advising Type for <%=request.getParameter("pname")%> <span class="caret"></span>
-			</button>
-		<ul class="dropdown-menu" role="menu">
-			<%for (int i=0;i<ats.size();i++){
-				%><li><a href="?apptype=<%=ats.get(i).getType()%>&pname=<%=request.getParameter("pname")%>&advisor_email=<%=ats.get(0).getEmail()%>&id1=<%=request.getParameter("id1")%>&duration=<%=ats.get(i).getDuration()%>"><%=ats.get(i).getType()%></a></li> <%
+	<button class="btn btn-default btn-lg dropdown-toggle" type="button"
+		data-toggle="dropdown">
+		Select Advising Type for
+		<%=request.getParameter("pname")%>
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<%for (int i=0;i<ats.size();i++){
+				%><li><a
+			href="?apptype=<%=ats.get(i).getType()%>&pname=<%=request.getParameter("pname")%>&advisor_email=<%=ats.get(0).getEmail()%>&id1=<%=request.getParameter("id1")%>&duration=<%=ats.get(i).getDuration()%>"><%=ats.get(i).getType()%></a></li>
+		<%
 			}
 		}%>
-		</ul>
-		</div>
-		<br><br><hr>
-		<div id='calendar'></div>
-   		<%@ page import= "java.util.ArrayList" %>
-		<%@ page import= "uta.mav.appoint.TimeSlotComponent" %>
-		<%@ page import= "uta.mav.appoint.PrimitiveTimeSlot" %>
-		<%@ page import= "uta.mav.appoint.CompositeTimeSlot" %>
-		
-		<% TimeSlotComponent schedule = (TimeSlotComponent)session.getAttribute("timeslot");
+	</ul>
+</div>
+<br>
+<br>
+<hr>
+<div id='calendar'></div>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="uta.mav.appoint.TimeSlotComponent"%>
+<%@ page import="uta.mav.appoint.PrimitiveTimeSlot"%>
+<%@ page import="uta.mav.appoint.CompositeTimeSlot"%>
+
+<% TimeSlotComponent schedule = (TimeSlotComponent)session.getAttribute("timeslot");
 		    			if (schedule != null){%>
-		    				<script>
+<script>
 		    				$(document).ready(function(){
 		    					$('#calendar').fullCalendar({
 		    						defaultView : 'basicDay',
@@ -59,10 +66,12 @@
 		    					        ]<%}%>	
 		    					});
 		    				});
-	 						</script>	
-		 					<%}%>
-	<br/><br/><hr>
-	<form name=addAppt action="schedule" method="post">
+	 						</script>
+<%}%>
+<br />
+<br />
+<hr>
+<form name=addAppt action="schedule" method="post">
 	<div class="modal fade" id="addApptModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -70,34 +79,36 @@
 					<h4 class="modal-title" id=addApptTypeLabel">Add Appointment</h4>
 				</div>
 				<div class="modal-body">
-						<input type="hidden" name=id2 id="id2">
-						<input type="hidden" name=apptype id="apptype">
-						<input type="hidden" name=start id="start">
-						<input type="hidden" name=end id="end">
-						<input type="hidden" name=starttime id="starttime">
-						<input type="hidden" name=endtime id="endtime">
-						<input type="hidden" name=pname id="pname">
-						<input type="hidden" name=duration id="duration">
-						<input type="hidden" name=advisor_email id="advisor_email">
-						Email address: <br><input type="text" name="email" id="email" value="<%= user.getEmail()%>"><br>
-						UTA Student ID: <br><input type="text" name="studentid"> <br>
-						Description: <br><textarea rows=4 columns="10" name="description"></textarea>
+					<input type="hidden" name=id2 id="id2"> <input
+						type="hidden" name=apptype id="apptype"> <input
+						type="hidden" name=start id="start"> <input type="hidden"
+						name=end id="end"> <input type="hidden" name=starttime
+						id="starttime"> <input type="hidden" name=endtime
+						id="endtime"> <input type="hidden" name=pname id="pname">
+					<input type="hidden" name=duration id="duration"> <input
+						type="hidden" name=advisor_email id="advisor_email"> Email
+					address: <br> <input type="text" name="email" id="email"
+						value="<%= user.getEmail()%>"><br> UTA Student ID: <br>
+					<input type="text" name="studentid"> <br> Phone
+					Number: <br> <input type="text" name="phoneNumber"> <br>
+					Description: <br>
+					<textarea rows=4 columns="10" name="description"></textarea>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default"
-						data-dismiss="modal"> Close 
-					</button>
-					<input type="submit" value="Submit" onclick="javascript:FormSubmit();">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
+					<input type="submit" value="Submit"
+						onclick="javascript:FormSubmit();">
 				</div>
 			</div>
 		</div>
 	</div>
-	</form>
+</form>
 <style>
-	#calendar{
+#calendar {
 	background-color: white;
-	}
-</style>	
+}
+</style>
 <script> function FormSubmit(){
 									var student_email = document.getElementById("email").value;
 									var advisor_email = document.getElementById("advisor_email").value;
@@ -118,4 +129,4 @@
 								}
 								</script>
 
-<%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp"%>

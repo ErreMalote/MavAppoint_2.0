@@ -39,8 +39,8 @@ public class RDBImpl implements DBImplInterface{
 		try
 	    {
 	    Class.forName("com.mysql.jdbc.Driver").newInstance();
-	    String jdbcUrl = "jdbc:mysql://localhost:3306/MavAppointDB";
-	    String userid = "team3";
+	    String jdbcUrl = "jdbc:mysql://localhost:3306/MavAppointDB2Spring";
+	    String userid = "team2Spring";
 	    String password = "er1ja@18xs@33";
 	    Connection conn = DriverManager.getConnection(jdbcUrl,userid,password);
 	    return conn;

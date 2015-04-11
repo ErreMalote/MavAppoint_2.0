@@ -140,7 +140,7 @@ public class TestRDBImpl {
 	@Test
 	public void testGetAppointments() {
 		AdvisorUser user = new AdvisorUser("notanadvisor@uta.edu","Test Adv 1");
-		ArrayList<Appointment> array = dbm.getAppointments(user);
+		ArrayList<Object> array = dbm.getAppointments(user);
 		assertTrue(array.size() == 0);
 		user.setEmail("testadvisor@uta.edu");
 		array = dbm.getAppointments(user);

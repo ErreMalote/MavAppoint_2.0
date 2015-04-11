@@ -1,62 +1,72 @@
 <jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
+
 <% ArrayList<String> array = (ArrayList<String>)session.getAttribute("advisors");
-	if (array != null){ %>	 
+	if (array != null){ %>
 
 
 <div class="container">
-    <h3> <font color="#e67e22">Select Department</font></h3>
-    <br>
-    <select id="drp_button" class="btn btn-default btn-lg dropdown-toggle">
-    <option value="CSE">CSE</option>
-    <option value="MAE">MAE</option>
-    <option value="ARCH">ARCH</option>
-    <option value="MATH">MATH</option>
-    </select>
-    <br>
+	<label for="drp_department"><font color="#e67e22" size="4">Select Department</label> 
+		<br>
+		<select id="drp_department" class="btn btn-default btn-lg dropdown-toggle">
+			<option value="CSE">CSE</option>
+			<option value="MAE">MAE</option>
+			<option value="ARCH">ARCH</option>
+			<option value="MATH">MATH</option>
+		</select> 
+		<br>
+
 	<div class="page-header">
+
+
+
 		<div class="pull-right form-inline">
 			<div class="btn-group">
-				 	<form action="advising" method="post" name="advisor_form">
-				 	<input type=hidden name=advisor_button id="advisor_button">
-		    		<%@ page import= "java.util.ArrayList" %>
-		    		
-		    		<!-- begin processing advisors  -->
-		    				<button type="button" id="all1" onclick="alladvisors()">All</button>
-		    				<script> function alladvisors(){
+				<form action="advising" method="post" name="advisor_form">
+					<input type=hidden name=advisor_button id="advisor_button">
+					<%@ page import="java.util.ArrayList"%>
+
+					<!-- begin processing advisors  -->
+					<button type="button" id="all1" onclick="alladvisors()">All</button>
+					<script> function alladvisors(){
 		    							document.getElementById("advisor_button").value = "all";
 		    							advisor_form.submit();
 		    						 }
 		    				</script>
-		    			<%	for (int i=0;i<array.size();i++){ %>
-		    					<button type="button" id="button1<%=i%>" onclick="button<%=i%>()"><%=array.get(i)%></button>
-								<script> function button<%=i%>(){
-										document.getElementById("advisor_button").value = "<%=array.get(i)%>";
-										advisor_form.submit();
-								}</script>
-						<%	}%>
+					<%
+							for (int i=0;i<array.size();i++){
+								
+								%>
+					<button type="button" id="button1<%=i%>" onclick="button<%=i%>()"><%=array.get(i)%></button>
+					<script> function button<%=i%>(){
+											document.getElementById("advisor_button").value = "<%=array.get(i)%>";
+											advisor_form.submit();
+											}
+									</script>
+					<%	}%>
 				</form>
 			</div>
 		</div>
 	</div>
 	<%} 
 		 else{%>
-		    <label><font color="#e67e22" size="5"> Log in to see Advisor schedules. </label>
-			<% } %>
-					 <!-- end processing advisors -->	 
-	
+	<label><font color="#e67e22" size="5"> Log in to see
+			Advisor schedules. </label>
+	<% } %>
+	<!-- end processing advisors -->
+
 	<div class="date-display span12">
 		<h3></h3>
 	</div>
-	
-			<div id='calendar'></div>
-		<%@ page import= "uta.mav.appoint.TimeSlotComponent" %>
-		<%@ page import= "uta.mav.appoint.PrimitiveTimeSlot" %>
-		<%@ page import= "uta.mav.appoint.CompositeTimeSlot" %>
-		<%@ page import= "uta.mav.appoint.beans.AdvisingSchedule" %>
-		<%@ page import= "uta.mav.appoint.beans.Appointment" %>
-		
-		<!--  begin processing schedules -->
-		<% ArrayList<TimeSlotComponent> schedules = (ArrayList<TimeSlotComponent>)session.getAttribute("schedules");
+
+	<div id='calendar'></div>
+	<%@ page import="uta.mav.appoint.TimeSlotComponent"%>
+	<%@ page import="uta.mav.appoint.PrimitiveTimeSlot"%>
+	<%@ page import="uta.mav.appoint.CompositeTimeSlot"%>
+	<%@ page import="uta.mav.appoint.beans.AdvisingSchedule"%>
+	<%@ page import="uta.mav.appoint.beans.Appointment"%>
+
+	<!--  begin processing schedules -->
+	<% ArrayList<TimeSlotComponent> schedules = (ArrayList<TimeSlotComponent>)session.getAttribute("schedules");
 		   ArrayList<Appointment> appointments = (ArrayList<Appointment>)session.getAttribute("appointments");
 		    				%><script>
 		    				$(document).ready(function(){
@@ -110,23 +120,23 @@
 		 					 			]<%}%>
 		    					});
 		    				});
-	 						</script>	
-		 						
+	 						</script>
+
 
 	<form name=addAppt action="schedule" method="get">
-		<input type="hidden" name=id1 id="id1">
-		<input type="hidden" name=pname id="pname">
-		<input type="hidden" name=advisor_email id="advisor_email">
-	</form>		 							
-	
-	<form name=updateAppt action="appointments" method="get">
+		<input type="hidden" name=id1 id="id1"> <input type="hidden"
+			name=pname id="pname"> <input type="hidden"
+			name=advisor_email id="advisor_email">
 	</form>
-  	
-	<br/><br/><hr>
+
+	<form name=updateAppt action="appointments" method="get"></form>
+
+	<br /> <br />
+	<hr>
 </div>
 <style>
-	#calendar {
-		background-color: white;
-	}
+#calendar {
+	background-color: white;
+}
 </style>
-<%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp"%>

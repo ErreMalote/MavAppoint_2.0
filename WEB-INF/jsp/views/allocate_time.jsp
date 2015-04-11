@@ -1,14 +1,14 @@
 <jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
-	<div id='calendar'></div>
-		<%@ page import= "uta.mav.appoint.TimeSlotComponent" %>
-		<%@ page import= "uta.mav.appoint.PrimitiveTimeSlot" %>
-		<%@ page import= "uta.mav.appoint.CompositeTimeSlot" %>
-		<%@ page import= "uta.mav.appoint.beans.AdvisingSchedule" %>
-		<%@ page import= "uta.mav.appoint.beans.Appointment" %>
-		<%@ page import= "java.util.ArrayList" %>
-	
-		<!--  begin processing schedules -->
-		<% ArrayList<TimeSlotComponent> schedules = (ArrayList<TimeSlotComponent>)session.getAttribute("schedules");
+<div id='calendar'></div>
+<%@ page import="uta.mav.appoint.TimeSlotComponent"%>
+<%@ page import="uta.mav.appoint.PrimitiveTimeSlot"%>
+<%@ page import="uta.mav.appoint.CompositeTimeSlot"%>
+<%@ page import="uta.mav.appoint.beans.AdvisingSchedule"%>
+<%@ page import="uta.mav.appoint.beans.Appointment"%>
+<%@ page import="java.util.ArrayList"%>
+
+<!--  begin processing schedules -->
+<% ArrayList<TimeSlotComponent> schedules = (ArrayList<TimeSlotComponent>)session.getAttribute("schedules");
 		   ArrayList<Appointment> appointments = (ArrayList<Appointment>)session.getAttribute("appointments");
 		    				%><script>
 		    				$(document).ready(function(){
@@ -74,10 +74,11 @@
 		 					 			]<%}%>
 		    					});
 		    				});
-	 						</script>	
-		 						
+	 						</script>
 
-	<form name=addTimeSlot action="availability" method="post" onsubmit="return false;">
+
+<form name=addTimeSlot action="availability" method="post"
+	onsubmit="return false;">
 	<div class="modal fade" id="addTimeSlotModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -85,55 +86,56 @@
 					<h4 class="modal-title" id="addTimeSlotLabel">Add Time Slots</h4>
 				</div>
 				<div class="modal-body">
-						<label for="starttime">Start Time:</label>
-		 				<input type="time" class="form-control" name=starttime id="starttime" step="300">
-		 				<label for="tndtime">End Time:</label>
-		 				<input type="time" class="form-control" name=endtime id="endtime" step="300">
-		 				<label for="opendate">Date:</label>
-		 				<input type="text" class="form-control" name=opendate id="opendate">
-		 				<label for="repeat">Weekly repeat duration:</label>
-						<input type="text" class="form-control" name=repeat id="repeat"
-						value="0">
-						<label id="result"><font style="color:#e67e22" size="4"></label>
+					<label for="starttime">Start Time:</label> <input type="time"
+						class="form-control" name=starttime id="starttime" step="300">
+					<label for="tndtime">End Time:</label> <input type="time"
+						class="form-control" name=endtime id="endtime" step="300">
+					<label for="opendate">Date:</label> <input type="text"
+						class="form-control" name=opendate id="opendate"> <label
+						for="repeat">Weekly repeat duration:</label> <input type="text"
+						class="form-control" name=repeat id="repeat" value="0"> <label
+						id="result"><font style="color: #e67e22" size="4"></label>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default"
-						data-dismiss="modal"> Close 
-					</button>
-					<input type="submit" value="submit" onclick="javascript:FormSubmit();">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
+					<input type="submit" value="submit"
+						onclick="javascript:FormSubmit();">
 				</div>
 			</div>
 		</div>
 	</div>
-	</form>
-	<form name=deleteTimeSlot action="ts-manage" method="post" onsubmit="return false;">
+</form>
+<form name=deleteTimeSlot action="ts-manage" method="post"
+	onsubmit="return false;">
 	<div class="modal fade" id="deleteTimeSlotModal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="deleteTimeSlotTitle">Delete Time Slot</h4>
+					<h4 class="modal-title" id="deleteTimeSlotTitle">Delete Time
+						Slot</h4>
 				</div>
 				<div class="modal-body">
-						<label for="StartTime">Start Time:</label>
-		 				<input type="time" class="form-control" name=StartTime2 id="StartTime2" step="300">
-		 				<label for="EndTime">End Time:</label>
-		 				<input type="time" class="form-control" name=EndTime2 id="EndTime2" step="300">
-		 				<label for="Date">Date:</label>
-		 				<input type="date" class="form-control" name=Date id="Date">
-		 				<input type="hidden" name=pname id="pname">
-		 				<label id="result2"><font style="color:#e67e22" size="4"></label>
+					<label for="StartTime">Start Time:</label> <input type="time"
+						class="form-control" name=StartTime2 id="StartTime2" step="300">
+					<label for="EndTime">End Time:</label> <input type="time"
+						class="form-control" name=EndTime2 id="EndTime2" step="300">
+					<label for="Date">Date:</label> <input type="date"
+						class="form-control" name=Date id="Date"> <input
+						type="hidden" name=pname id="pname"> <label id="result2"><font
+						style="color: #e67e22" size="4"></label>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default"
-						data-dismiss="modal"> Close 
-					</button>
-					<input type="submit" value="submit" onclick="javascript:validate();">
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						Close</button>
+					<input type="submit" value="submit"
+						onclick="javascript:validate();">
 				</div>
 			</div>
 		</div>
 	</div>
-	</form>
-	<script> function FormSubmit(){
+</form>
+<script> function FormSubmit(){
 									var starttime = document.getElementById("starttime").value;
 									var endtime = document.getElementById("endtime").value;
 									var date = document.getElementById("opendate").value;
@@ -155,7 +157,7 @@
 								}
 
 					</script>
-	<script>
+<script>
 	function validate(){
 		var valid = confirm('Are you sure you want to delete?');	
 		if (valid == true){
@@ -185,8 +187,8 @@
 	}
 	</script>
 <style>
-	#calendar{
-		background-color: white;
-	}
+#calendar {
+	background-color: white;
+}
 </style>
-<%@include file="templates/footer.jsp" %>
+<%@include file="templates/footer.jsp"%>

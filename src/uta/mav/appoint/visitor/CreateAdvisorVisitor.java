@@ -15,7 +15,7 @@ public class CreateAdvisorVisitor extends Visitor{
 			DatabaseManager dbm = new DatabaseManager();
 			Boolean result = dbm.createAdvisor(ca);
 			if (result == true){
-				user.setMsg("Advisor account created.");
+				user.setMsg("Advisor account created with password \"newadvisor!@3\".");
 			}
 			else{
 				user.setMsg("Error: Cannot create account.");

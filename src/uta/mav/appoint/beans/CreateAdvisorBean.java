@@ -5,6 +5,7 @@ public class CreateAdvisorBean {
 	String password;
 	String role;
 	String pname;
+	
 	/**
 	 * @return the email
 	 */

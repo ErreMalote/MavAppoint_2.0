@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 
 import uta.mav.appoint.login.AdminUser;
 import uta.mav.appoint.login.AdvisorUser;
+import uta.mav.appoint.login.LeadAdvisorUser;
 import uta.mav.appoint.login.FacultyUser;
 import uta.mav.appoint.login.LoginUser;
 import uta.mav.appoint.login.StudentUser;
@@ -50,6 +51,9 @@ public class CheckUser extends SQLCmd{
 				if (!(res.getInt(1) == 0)){
 					if (res.getString(2).toLowerCase().equals("advisor")){
 						user = new AdvisorUser(email,pname);
+					}
+					else if (res.getString(2).toLowerCase().equals("lead_advisor")){
+						user = new LeadAdvisorUser(email,pname);
 					}
 					else if (res.getString(2).toLowerCase().equals("student")){
 						user = new StudentUser(email);
