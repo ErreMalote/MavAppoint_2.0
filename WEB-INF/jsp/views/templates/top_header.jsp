@@ -2,7 +2,7 @@
 <html>
 <head>
 <title>MavAppoint</title>
-
+ Hi rey!
 <meta name="description"
 	content="Full view calendar component for twitter bootstrap with year, month, week, day views.">
 <meta name="keywords"
