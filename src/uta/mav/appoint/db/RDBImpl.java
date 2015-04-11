@@ -114,13 +114,13 @@ public class RDBImpl implements DBImplInterface{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
 			if (name.equals("all")){
-			String command = "SELECT pname,advising_date,advising_starttime,advising_endtime,id FROM user,advising_schedule,advisor_settings "
-							+ "WHERE user.userid=advisor_settings.userid AND user.userid=advising_schedule.userid AND studentid is null";
+			String command = "SELECT pname,date,start,end,id FROM user,Advising_Schedule,User_Advisor "
+							+ "WHERE user.userid=User_Advisor.userid AND user.userid=Advising_Schedule.userid AND studentId is null";
 			statement = conn.prepareStatement(command);
 			}
 			else{
-				String command = "SELECT pname,advising_date,advising_starttime,advising_endtime,id FROM USER,ADVISING_SCHEDULE,ADVISOR_SETTINGS "
-								+ "WHERE USER.userid=ADVISOR_SETTINGS.userid AND USER.userid=ADVISING_SCHEDULE.userid AND USER.userid=ADVISING_SCHEDULE.userid AND ADVISOR_SETTINGS.pname=? AND studentid is null";
+				String command = "SELECT pname,date,start,end,id FROM USER,Advising_Schedule,User_Advisor "
+								+ "WHERE USER.userid=User_Advisor.userid AND USER.userid=Advising_Schedule.userid AND USER.userid=Advising_Schedule.userid AND User_Advisor.pname=? AND studentId is null";
 				statement = conn.prepareStatement(command);
 				statement.setString(1,name);
 			}	
@@ -158,7 +158,7 @@ public class RDBImpl implements DBImplInterface{
 			while(rs.next()){
 				student_id = rs.getInt(1);
 			}
-			command = "SELECT userid FROM advisor_settings WHERE advisor_settings.pname=?";
+			command = "SELECT userid FROM User_Advisor WHERE User_Advisor.pname=?";
 			statement=conn.prepareStatement(command);
 			statement.setString(1, a.getPname());
 			rs = statement.executeQuery();
@@ -166,7 +166,7 @@ public class RDBImpl implements DBImplInterface{
 				advisor_id = rs.getInt(1);
 			}
 			//check for slots already taken
-			command = "SELECT COUNT(*) FROM advising_schedule WHERE userid=? AND advising_date=? AND advising_starttime=? AND advising_endtime=? AND studentid is not null";
+			command = "SELECT COUNT(*) FROM Advising_Schedule WHERE userid=? AND date=? AND start=? AND end=? AND studentId is not null";
 			statement = conn.prepareStatement(command);
 			statement.setInt(1, advisor_id);
 			statement.setString(2, a.getAdvisingDate());
@@ -175,7 +175,7 @@ public class RDBImpl implements DBImplInterface{
 			rs = statement.executeQuery();
 			while(rs.next()){
 				if (rs.getInt(1) < 1){
-					command = "INSERT INTO appointments (id,advisor_userid,student_userid,advising_date,advising_starttime,advising_endtime,appointment_type,studentid,description,student_email)"
+					command = "INSERT INTO Appointments (id,advisor_userid,student_userid,date,start,end,type,studentId,description,student_email)"
 							+"VALUES(?,?,?,?,?,?,?,?,?,?)";
 					statement = conn.prepareStatement(command);
 					statement.setInt(1, a.getAppointmentId());
@@ -185,13 +185,13 @@ public class RDBImpl implements DBImplInterface{
 					statement.setString(5,a.getAdvisingStartTime());
 					statement.setString(6,a.getAdvisingEndTime());
 					statement.setString(7,a.getAppointmentType());
-					statement.setInt(8,Integer.parseInt(a.getStudentid()));
+					statement.setInt(8,Integer.parseInt(a.getStudentId()));
 					statement.setString(9,a.getDescription());
 					statement.setString(10,email);
 					statement.executeUpdate();
-					command = "UPDATE advising_schedule SET studentid=? where userid=? AND advising_date=? and advising_starttime >= ? and advising_endtime <= ?";
+					command = "UPDATE Advising_Schedule SET studentId=? where userid=? AND date=? and start >= ? and end <= ?";
 					statement=conn.prepareStatement(command);
-					statement.setInt(1,Integer.parseInt(a.getStudentid()));
+					statement.setInt(1,Integer.parseInt(a.getStudentId()));
 					statement.setInt(2, advisor_id);
 					statement.setString(3, a.getAdvisingDate());
 					statement.setString(4, a.getAdvisingStartTime());
@@ -209,12 +209,12 @@ public class RDBImpl implements DBImplInterface{
 	}
 
 	public ArrayList<Object> getAppointments(AdvisorUser user){
-		ArrayList<Object> appointments = new ArrayList<Object>();
+		ArrayList<Object> Appointments = new ArrayList<Object>();
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT advisor_settings.pname,advisor_settings.email,advising_date,advising_starttime,advising_endtime,appointment_type,id,appointments.description,studentid,appointments.student_email FROM USER,APPOINTMENTS,ADVISOR_SETTINGS "
-						+ "WHERE USER.email=? AND user.userid=appointments.advisor_userid AND advisor_settings.userid=appointments.advisor_userid";
+			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,Appointments.description,studentId,Appointments.student_email FROM USER,Appointments,User_Advisor "
+						+ "WHERE USER.email=? AND user.userid=Appointments.advisor_userid AND User_Advisor.userid=Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			statement.setString(1, user.getEmail());
 			ResultSet rs = statement.executeQuery();
@@ -228,9 +228,9 @@ public class RDBImpl implements DBImplInterface{
 				set.setAppointmentType(rs.getString(6));
 				set.setAppointmentId(rs.getInt(7));
 				set.setDescription(rs.getString(8));
-				set.setStudentid(rs.getString(9));
+				set.setStudentId(rs.getString(9));
 				set.setStudentEmail(rs.getString(10));
-				appointments.add(set);
+				Appointments.add(set);
 			}
 			conn.close();
 		}
@@ -238,16 +238,16 @@ public class RDBImpl implements DBImplInterface{
 			System.out.printf(e.toString());
 		}
 		
-		return appointments;
+		return Appointments;
 	}
 
 	public ArrayList<Object> getAppointments(StudentUser user){
-		ArrayList<Object> appointments = new ArrayList<Object>();
+		ArrayList<Object> Appointments = new ArrayList<Object>();
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT advisor_settings.pname,advisor_settings.email,advising_date,advising_starttime,advising_endtime,appointment_type,id,description,student_email FROM USER,APPOINTMENTS,ADVISOR_SETTINGS "
-						+ "WHERE USER.email=? AND user.userid=appointments.student_userid AND advisor_settings.userid=appointments.advisor_userid";
+			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,description,student_email FROM USER,Appointments,User_Advisor "
+						+ "WHERE USER.email=? AND user.userid=Appointments.student_userid AND User_Advisor.userid=Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			statement.setString(1, user.getEmail());
 			ResultSet rs = statement.executeQuery();
@@ -261,9 +261,9 @@ public class RDBImpl implements DBImplInterface{
 				set.setAppointmentType(rs.getString(6));
 				set.setAppointmentId(rs.getInt(7));
 				set.setDescription(rs.getString(8));
-				set.setStudentid("Advisor only");
+				set.setStudentId("Advisor only");
 				set.setStudentEmail(rs.getString(9));
-				appointments.add(set);
+				Appointments.add(set);
 			}
 			conn.close();
 		}
@@ -271,16 +271,16 @@ public class RDBImpl implements DBImplInterface{
 			System.out.printf(e.toString());
 		}
 		
-		return appointments;
+		return Appointments;
 	}
 
 	public ArrayList<Object> getAppointments(AdminUser user){
-		ArrayList<Object> appointments = new ArrayList<Object>();
+		ArrayList<Object> Appointments = new ArrayList<Object>();
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT advisor_settings.pname,advisor_settings.email,advising_date,advising_starttime,advising_endtime,appointment_type,id FROM appointments INNER JOIN advisor_settings "
-						+"WHERE advisor_settings.userid = appointments.advisor_userid";
+			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id FROM Appointments INNER JOIN User_Advisor "
+						+"WHERE User_Advisor.userid = Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()){
@@ -292,7 +292,7 @@ public class RDBImpl implements DBImplInterface{
 				set.setAdvisingEndTime(rs.getString(5));
 				set.setAppointmentType(rs.getString(6));
 				set.setAppointmentId(rs.getInt(7));
-				appointments.add(set);
+				Appointments.add(set);
 			}
 			conn.close();
 		}
@@ -300,7 +300,7 @@ public class RDBImpl implements DBImplInterface{
 			System.out.printf(e.toString());
 		}
 		
-		return appointments;
+		return Appointments;
 	}
 	
 	public Boolean cancelAppointment(int id){
@@ -308,17 +308,17 @@ public class RDBImpl implements DBImplInterface{
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT count(*),advising_date,advising_starttime, advising_endtime from appointments where id=?";
+			String command = "SELECT count(*),date,start, end from Appointments where id=?";
 			statement=conn.prepareStatement(command);
 			statement.setInt(1,id);
 			ResultSet rs = statement.executeQuery();
 			while(rs.next()){
 				if (rs.getInt(1) == 1){
-					command = "DELETE FROM appointments where id=?";
+					command = "DELETE FROM Appointments where id=?";
 					statement=conn.prepareStatement(command);
 					statement.setInt(1, id);
 					statement.executeUpdate();
-					command = "UPDATE advising_schedule SET studentid=null where advising_date=? AND advising_starttime >=? AND advising_endtime <=?";
+					command = "UPDATE Advising_Schedule SET studentId=null where date=? AND start >=? AND end <=?";
 					statement=conn.prepareStatement(command);
 					statement.setString(1, rs.getString(2));
 					statement.setString(2,rs.getString(3));
@@ -357,7 +357,7 @@ public class RDBImpl implements DBImplInterface{
 			try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT type,duration,user.email FROM  appointment_types,advisor_settings,user WHERE appointment_types.userid=advisor_settings.userid AND advisor_settings.userid=user.userid AND advisor_settings.pname=?";
+			String command = "SELECT type,duration,user.email FROM  Appointment_Types,User_Advisor,user WHERE Appointment_Types.userid=User_Advisor.userid AND User_Advisor.userid=user.userid AND User_Advisor.pname=?";
 			statement = conn.prepareStatement(command);
 			statement.setString(1,pname);
 			ResultSet rs = statement.executeQuery();

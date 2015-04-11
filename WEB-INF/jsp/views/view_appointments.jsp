@@ -51,7 +51,7 @@
 						<td><%=array.get(i).getAppointmentType()%></td>
 						<td><%=array.get(i).getAdvisorEmail()%></td>
 						<td><%=array.get(i).getDescription() %></td>
-						<td><%=array.get(i).getStudentid()%></td>
+						<td><%=array.get(i).getStudentId()%></td>
 						<td><%=array.get(i).getStudentEmail()%></td>
 						<td class="text-center"><button type="button" id=button1
 								<%=i%> onclick="button<%=i%>()">Cancel</button></td>

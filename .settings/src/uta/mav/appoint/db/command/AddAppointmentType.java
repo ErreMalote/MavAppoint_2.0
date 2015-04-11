@@ -25,7 +25,7 @@ public class AddAppointmentType extends SQLCmd {
 		@Override
 		public void queryDB(){
 			try{
-				String command = "INSERT INTO appointment_types (userid, type, duration)"
+				String command = "INSERT INTO Appointment_Types (userid, type, duration)"
 								+ " values(?,?,?)";
 				PreparedStatement statement = conn.prepareStatement(command); 
 				statement.setInt(1,userid);

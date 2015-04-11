@@ -123,13 +123,13 @@ public class Appointment implements Serializable{
 	/**
 	 * @return the studentid
 	 */
-	public String getStudentid() {
+	public String getStudentId() {
 		return studentid;
 	}
 	/**
 	 * @param studentid the studentid to set
 	 */
-	public void setStudentid(String studentid) {
+	public void setStudentId(String studentid) {
 		this.studentid = studentid;
 	}
 	/**

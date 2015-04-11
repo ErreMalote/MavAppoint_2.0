@@ -13,7 +13,7 @@ public class UpdateAppointment extends SQLCmd{
 	
 	public UpdateAppointment(Appointment a){
 		description = a.getDescription();
-		studentid = a.getStudentid();
+		studentid = a.getStudentId();
 		id = a.getAppointmentId();
 	}
 	

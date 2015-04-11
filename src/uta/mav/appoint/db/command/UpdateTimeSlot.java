@@ -21,7 +21,7 @@ public class UpdateTimeSlot extends SQLCmd{
 	
 	public void queryDB(){
 		try{
-			String command = "DELETE FROM advising_schedule,advisor_settings WHERE advising_date=? AND advising_starttime >=? AND advising_endtime <=? AND advisor_settings.pname=? AND advisor_settings.userid=user.userid";
+			String command = "DELETE FROM advising_schedule,User_Advisor WHERE date=? AND start >=? AND end <=? AND User_Advisor.pname=? AND User_Advisor.userid=user.userid";
 			PreparedStatement statement = conn.prepareStatement(command);
 			statement.setString(1, date);
 			statement.setString(2, start);

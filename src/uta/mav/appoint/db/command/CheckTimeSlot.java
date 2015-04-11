@@ -23,7 +23,7 @@ public class CheckTimeSlot extends SQLCmd{
 
 	public void queryDB(){
 	try{
-		String command = "SELECT COUNT(*) FROM  ADVISING_SCHEDULE WHERE advising_date=? AND advising_starttime >=? AND advising_endtime <=? AND userid=?";
+		String command = "SELECT COUNT(*) FROM  ADVISING_SCHEDULE WHERE date=? AND start >=? AND end <=? AND userid=?";
 		PreparedStatement statement = conn.prepareStatement(command);
 		statement.setString(1,date);
 		statement.setString(2,starttime);

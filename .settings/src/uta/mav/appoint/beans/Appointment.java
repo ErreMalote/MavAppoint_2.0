@@ -123,7 +123,7 @@ public class Appointment implements Serializable{
 	/**
 	 * @return the studentid
 	 */
-	public String getStudentid() {
+	public String getStudentId() {
 		return studentid;
 	}
 	/**
