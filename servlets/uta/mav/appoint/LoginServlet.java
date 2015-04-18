@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 			if(user != null){
 				session.setAttribute("user", user);
 				response.sendRedirect("index");
+				
 			}
 			else{
 				//redirect back to login if authentication fails

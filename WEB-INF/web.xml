@@ -138,6 +138,13 @@
 		<servlet-name>AddAppointmentServlet</servlet-name>
 		<servlet-class>uta.mav.appoint.AddAppointmentServlet</servlet-class>
 	</servlet>
-
+	<servlet-mapping>
+		<servlet-name>AssignStudentsServlet</servlet-name>
+		<url-pattern>/assign_students</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>AssignStudentsServlet</servlet-name>
+		<servlet-class>uta.mav.appoint.AssignStudentsServlet</servlet-class>
+	</servlet>
 
 </web-app>

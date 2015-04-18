@@ -21,8 +21,8 @@ import uta.mav.appoint.visitor.Visitor;
  */
 public class CreateAdvisorServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-    HttpSession session;   
-    String header;
+    private HttpSession session;   
+    private String header;
  
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

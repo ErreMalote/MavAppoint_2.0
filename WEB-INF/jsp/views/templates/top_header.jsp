@@ -12,8 +12,8 @@
 
 <link rel="stylesheet"
 	href="components/bootstrap3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="components/bootstrap3/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="components/bootstrap3/css/bootstrap-datetimepicker.min.css">
+<link href="components/mavappoint.css" rel="stylesheet"/>
 <link rel="stylesheet" href="css/fullcalendar.css">
 
 <script type="text/javascript" src="components/jquery/jquery.min.js"></script>
@@ -27,21 +27,6 @@
 <script type="text/javascript" src="js/fullcalendar.js"></script>
 <script type="text/javascript"
 	src="components/bootstrap3/js/bootstrap-datetimepicker.min.js"></script>
-<style>
-body {
-	padding-top: 100px;
-	padding-bottom: 100px;
-	background: url(img/engineering.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-}
-
-.brand {
-	background: url(img/mavlogo.gif) no-repeat left center;
-	height: 20px;
-	width: 20px;
-}
-</style>
 </head>
 <body>
 	<div class="container">
