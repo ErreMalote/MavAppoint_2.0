@@ -14,6 +14,7 @@ import uta.mav.appoint.beans.Appointment;
 import uta.mav.appoint.beans.AppointmentType;
 import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
+import uta.mav.appoint.beans.RegisterBean;
 import uta.mav.appoint.db.command.AddAppointmentType;
 import uta.mav.appoint.db.command.AddTimeSlot;
 import uta.mav.appoint.db.command.CheckTimeSlot;
@@ -24,6 +25,8 @@ import uta.mav.appoint.db.command.DeleteTimeSlot;
 import uta.mav.appoint.db.command.GetAdvisors;
 import uta.mav.appoint.db.command.GetAppointment;
 import uta.mav.appoint.db.command.GetUserID;
+import uta.mav.appoint.db.command.Register;
+import uta.mav.appoint.db.command.RegisterInitialStudent;
 import uta.mav.appoint.db.command.SQLCmd;
 import uta.mav.appoint.db.command.UpdateAppointment;
 import uta.mav.appoint.flyweight.TimeSlotFlyweightFactory;
@@ -82,13 +85,32 @@ public class RDBImpl implements DBImplInterface{
 		return result;
 	}
 	
-	public int addUser(GetSet set){
-		/*int check = 0;
-		Connection conn = DatabaseManager.ConnectDB();
-		String command = "INSERT INTO USER (email,password,role) VALUES(email=?,password=?,role=?)";
-		return check;
-		*/
-		return 0;
+	public Boolean addUser(RegisterBean registerBean){
+		try{
+			System.out.printf("About to use Bean\n");
+			SQLCmd cmd = new Register(registerBean);
+			System.out.printf("About to execute Bean\n");
+			cmd.execute();
+			System.out.print("Used Bean & has "+ (Boolean)cmd.getResult().get(0)+"\n");
+			if ((Boolean)cmd.getResult().get(0)){
+				System.out.print("Created user & has "+ (Boolean)cmd.getResult().get(0)+"\n");
+				cmd = new GetUserID(registerBean.getEmail());
+				cmd.execute();
+				System.out.printf("Created user & has %d\n", (int)cmd.getResult().get(0));
+				cmd = new RegisterInitialStudent((int)cmd.getResult().get(0),registerBean);
+				cmd.execute();
+				System.out.printf("Created student & has "+(Boolean)cmd.getResult().get(0)+"\n");
+				return (Boolean)cmd.getResult().get(0);
+			}
+			else{
+				System.out.println("Wrong value: "+cmd.getResult().get(0)+"RBImpl.java");
+				return false;
+			}	
+		}
+		catch(Exception e){
+			System.out.println(e+"RBImpl.java");
+			return false;
+		}
 	}
 	
 	//using command pattern

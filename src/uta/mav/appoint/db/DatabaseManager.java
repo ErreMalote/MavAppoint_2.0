@@ -9,6 +9,7 @@ import uta.mav.appoint.beans.Appointment;
 import uta.mav.appoint.beans.AppointmentType;
 import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
+import uta.mav.appoint.beans.RegisterBean;
 import uta.mav.appoint.login.AdminUser;
 import uta.mav.appoint.login.AdvisorUser;
 import uta.mav.appoint.login.LoginUser;
@@ -29,8 +30,8 @@ public class DatabaseManager {
 		return imp.checkUser(set);
 		}
 	
-	public int addUser(GetSet set) throws SQLException{
-		return imp.addUser(set);
+	public Boolean addUser(RegisterBean registerBean) throws SQLException{
+		return imp.addUser(registerBean);
 	}
 	
 	public ArrayList<String> getAdvisors() throws SQLException{

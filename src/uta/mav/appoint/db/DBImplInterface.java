@@ -10,6 +10,8 @@ import uta.mav.appoint.beans.Appointment;
 import uta.mav.appoint.beans.AppointmentType;
 import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
+import uta.mav.appoint.beans.RegisterBean;
+import uta.mav.appoint.db.command.Register;
 import uta.mav.appoint.login.AdminUser;
 import uta.mav.appoint.login.AdvisorUser;
 import uta.mav.appoint.login.LoginUser;
@@ -22,7 +24,7 @@ public interface DBImplInterface {
 	public ArrayList<Object> getAppointments(AdminUser user) throws SQLException;
 	public Boolean createAppointment(Appointment a, String email) throws SQLException;
 	public ArrayList<TimeSlotComponent> getAdvisorSchedule(String name) throws SQLException;
-	public int addUser(GetSet set) throws SQLException;
+	public Boolean addUser(RegisterBean registerBean) throws SQLException;
 	public ArrayList<String> getAdvisors() throws SQLException;
 	public LoginUser checkUser(GetSet set) throws SQLException;
 	public String addTimeSlot(AllocateTime at) throws SQLException;

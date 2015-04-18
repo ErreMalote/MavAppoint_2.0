@@ -29,7 +29,6 @@ public class CreateAdvisor extends SQLCmd{
 			statement.setString(1,email);
 			statement.setString(2,"newadvisor!@3");
 			statement.setString(3,role);
-			System.out.print(role);
 			statement.setInt(4,1);
 			statement.executeUpdate();
 			b = true;
