@@ -15,7 +15,7 @@ public class GetAppointment extends SQLCmd{
 	
 	public void queryDB(){
 		try{
-		String command = "SELECT advising_date,advising_starttime,advising_endtime,appointment_type FROM appointments a,user u WHERE a.student_userid=u.userid AND u.email=? AND advising_date >=? ORDER BY advising_date,advising_starttime LIMIT 1";
+		String command = "SELECT date,start,end,type FROM appointments a,user u WHERE a.student_userid=u.userid AND u.email=? AND date >=? ORDER BY date,start LIMIT 1";
 		PreparedStatement statement = conn.prepareStatement(command);
 		statement.setString(1,email);
 		statement.setString(2,date);

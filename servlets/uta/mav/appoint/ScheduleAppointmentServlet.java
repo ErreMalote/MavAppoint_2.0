@@ -49,7 +49,7 @@ public class ScheduleAppointmentServlet extends HttpServlet{
 		try{
 			Appointment a = new Appointment();
 			a.setAppointmentId(Integer.parseInt(request.getParameter("id2")));
-			a.setStudentid(request.getParameter("studentid"));
+			a.setStudentId(request.getParameter("studentid"));
 			a.setDescription(request.getParameter("description"));
 			a.setAppointmentType(request.getParameter("apptype"));
 			a.setPname(request.getParameter("pname"));

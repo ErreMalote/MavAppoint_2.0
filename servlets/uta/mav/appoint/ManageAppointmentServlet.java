@@ -70,7 +70,7 @@ public class ManageAppointmentServlet extends HttpServlet{
 					header = "templates/" + user.getHeader() + ".jsp";
 					Appointment a = new Appointment();
 					a.setDescription(request.getParameter("description"));
-					a.setStudentid(request.getParameter("studentid"));
+					a.setStudentId(request.getParameter("studentid"));
 					a.setAppointmentId(Integer.parseInt(request.getParameter("id2")));
 					DatabaseManager dbm = new DatabaseManager();
 					Boolean result = dbm.updateAppointment(a);

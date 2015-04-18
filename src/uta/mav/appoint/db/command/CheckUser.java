@@ -23,7 +23,7 @@ public class CheckUser extends SQLCmd{
 	@Override
 	public void queryDB(){
 		try{
-			String command = "SELECT COUNT(*),ROLE,pname FROM USER,advisor_settings WHERE user.userid=advisor_settings.userid AND user.EMAIL=? AND user.PASSWORD=?";
+			String command = "SELECT COUNT(*),ROLE,pname FROM USER,User_Advisor WHERE user.userid=User_Advisor.userid AND user.EMAIL=? AND user.PASSWORD=?";
 			PreparedStatement statement = conn.prepareStatement(command); 
 			statement.setString(1,email);
 			statement.setString(2,password);
@@ -31,7 +31,7 @@ public class CheckUser extends SQLCmd{
 			while(res.next()){
 				pname = res.getString(3);
 			}
-			command = "SELECT COUNT(*),ROLE,pname FROM USER,advisor_settings WHERE user.EMAIL=? AND user.PASSWORD=?";
+			command = "SELECT COUNT(*),ROLE,pname FROM USER,User_Advisor WHERE user.EMAIL=? AND user.PASSWORD=?";
 			statement = conn.prepareStatement(command); 
 			statement.setString(1,email);
 			statement.setString(2,password);

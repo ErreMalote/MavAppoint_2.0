@@ -28,6 +28,7 @@
 			onclick="javascript:FormSubmit();">
 	</form>
 </div>
+
 <label id="result"><font color="#e67e22" size="4"></font></label>
 <script> function FormSubmit(){
 									var email = document.getElementById("emailAddress").value;

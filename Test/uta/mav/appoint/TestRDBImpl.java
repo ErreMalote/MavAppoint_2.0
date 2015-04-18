@@ -116,7 +116,7 @@ public class TestRDBImpl {
 	@Test
 	public void testCreateAppointment() {//test all inputs invalid
 		Appointment a = new Appointment();
-		a.setStudentid("0");
+		a.setStudentId("0");
 		a.setAppointmentType("");
 		a.setAdvisingDate("2014-01-01");
 		a.setAdvisingStartTime("12:00");
@@ -127,7 +127,7 @@ public class TestRDBImpl {
 		
 		assertTrue(dbm.createAppointment(a,email) == false);
 		//test success
-		a.setStudentid("1000123456");
+		a.setStudentId("1000123456");
 		a.setAppointmentType("Add Class");
 		a.setAdvisingDate("2014-10-07");
 		a.setAdvisingStartTime("09:00");

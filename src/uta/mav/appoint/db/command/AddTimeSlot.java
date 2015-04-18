@@ -28,7 +28,7 @@ public class AddTimeSlot extends SQLCmd{
 	@Override
 	public void queryDB(){
 		try{
-			String command = "INSERT INTO ADVISING_SCHEDULE (advising_date,advising_starttime,advising_endtime,studentid,userid) VALUES(?,?,?,null,?)";
+			String command = "INSERT INTO ADVISING_SCHEDULE (date,start,end,studentid,userid) VALUES(?,?,?,null,?)";
 			PreparedStatement statement = conn.prepareStatement(command);
 			for (int i=0;i<count;i++){
 				statement.setString(1,date);

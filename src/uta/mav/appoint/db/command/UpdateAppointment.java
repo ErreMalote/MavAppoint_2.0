@@ -13,13 +13,13 @@ public class UpdateAppointment extends SQLCmd{
 	
 	public UpdateAppointment(Appointment a){
 		description = a.getDescription();
-		studentid = a.getStudentid();
+		studentid = a.getStudentId();
 		id = a.getAppointmentId();
 	}
 	
 	public void queryDB(){
 		try{
-			String command = "UPDATE appointments SET description=?,studentid=? where id=?";
+			String command = "UPDATE appointments SET description=?,studentId=? where id=?";
 			PreparedStatement statement = conn.prepareStatement(command);
 			statement.setString(1, description);
 			statement.setString(2, studentid);
