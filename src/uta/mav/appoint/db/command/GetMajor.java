@@ -3,9 +3,9 @@ package uta.mav.appoint.db.command;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class GetDepartmentStrings extends SQLCmd{
+public class GetMajor extends SQLCmd{
 	
-	public GetDepartmentStrings(){
+	public GetMajor(){
 		super();
 	}
 	
@@ -13,7 +13,7 @@ public class GetDepartmentStrings extends SQLCmd{
 	@Override
 	public void queryDB(){
 		try{
-			String command = "SELECT name FROM DEPARTMENT";
+			String command = "SELECT name FROM MAJOR";
 			PreparedStatement statement = conn.prepareStatement(command);
 			res = statement.executeQuery();	
 		}
@@ -37,3 +37,4 @@ public class GetDepartmentStrings extends SQLCmd{
 		
 	}
 }
+

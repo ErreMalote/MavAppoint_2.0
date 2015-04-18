@@ -35,4 +35,5 @@ public interface DBImplInterface {
 	public Boolean createAdvisor(CreateAdvisorBean ca) throws SQLException;	
 	public String addAppointmentType(AdvisorUser user, AppointmentType at) throws SQLException;
 	public ArrayList<String> getDepartmentStrings() throws SQLException;
+	public ArrayList<String> getMajor() throws SQLException;
 }
