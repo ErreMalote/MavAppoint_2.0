@@ -6,7 +6,12 @@ import uta.mav.appoint.beans.AllocateTime;
 import uta.mav.appoint.visitor.Visitor;
 
 public class AdvisorUser extends LoginUser{
-	String pname;
+	private String pname;
+	private String dept;
+	private ArrayList<String> degrees;
+	private Character nameLow;
+	private Character nameHigh;
+	private String degType;
 	
 	public AdvisorUser(String em, String p){
 		super(em);
