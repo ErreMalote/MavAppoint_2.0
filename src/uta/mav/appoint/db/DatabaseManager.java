@@ -87,5 +87,9 @@ public class DatabaseManager {
 	public String addAppointmentType(AdvisorUser user, AppointmentType at) throws SQLException{
 		return imp.addAppointmentType(user, at);
 	}
+	
+	public ArrayList<String> getDepartmentStrings() throws SQLException{
+		return imp.getDepartmentStrings();
+	}
 }
 
