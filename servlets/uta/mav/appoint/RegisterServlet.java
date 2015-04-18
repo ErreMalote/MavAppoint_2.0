@@ -41,15 +41,27 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		email = request.getParameter("emailAddress");
 		if(!email.endsWith("@mavs.uta.edu"))
-			
+		{
+			System.out.println("Email Address Invalid");
+			request.setAttribute("error","Unable to add user");
+			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+		}
 		password = request.getParameter("password");
 		rpassword = request.getParameter("repeatPassword");
+		if(!password.equals(rpassword))
+		{
+			System.out.println("Passwords do not match Invalid");
+			request.setAttribute("error","Unable to add user");
+			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+		}
 		phone_num = request.getParameter("phone_num");
-		System.out.println(phone_num);
+		if(phone_num.matches("^\\d{3}-^\\d{3}-^\\d{4}"))
+		{
+			System.out.println("Phone Number Invalid");
+			request.setAttribute("error","Unable to add user");
+			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+		}
 		role = "student";
-		
-
-		if(!email.endsWith("@mavs.uta.edu") || password.length()<8 || phone_num.matches("^\\d{3}-^\\d{3}-^\\d{4}"))
 		
 		try
 		{
@@ -73,65 +85,57 @@ public class RegisterServlet extends HttpServlet {
 		departments = new ArrayList<String> (Arrays.asList(request.getParameterValues("departments")));
 		degrees = new ArrayList<String> (Arrays.asList(request.getParameterValues("degrees")));
 
-		if(password.equals(rpassword)) {
-			
-			//need to add check for maverick email address
-			//need to add check that both passwords match
-			//need to redirect back to register with correct error message
-			RegisterBean set = new RegisterBean();
-			set.setEmail(email);
-			set.setPassword(password);
-			set.setRole(role);
-			set.setDegree_type(degree_type);
-			set.setPhone_num(phone_num);
-			set.setStudent_Id(student_Id);
-			
-			try{
-				DatabaseManager dbm = new DatabaseManager();
-				if (dbm.addUser(set)){
-					//if adduser successful, log in as added user and redirect
-					//back to start
-					System.out.println("Created user");
-					GetSet sets = new GetSet();
-					sets.setEmailAddress(email);
-					sets.setPassword(password);
-					try{
-						//call db manager and authenticate user, return value will be 0 or
-						//an integer indicating a role
-						LoginUser user = dbm.checkUser(sets);
-						System.out.println("Checked User");
-						if(user != null){
-							session = request.getSession();
-							System.out.println("Success");
-							session.setAttribute("user", user);
-							response.sendRedirect("index");
-						}
-						else{
-							//redirect back to login if authentication fails
-							//need to add a "invalid username or password" response
-							System.out.println("Wrong password?");
-							response.sendRedirect("login");
-						}
+		//need to add check for maverick email address
+		//need to add check that both passwords match
+		//need to redirect back to register with correct error message
+		RegisterBean set = new RegisterBean();
+		set.setEmail(email);
+		set.setPassword(password);
+		set.setRole(role);
+		set.setDegree_type(degree_type);
+		set.setPhone_num(phone_num);
+		set.setStudent_Id(student_Id);
+		
+		try{
+			DatabaseManager dbm = new DatabaseManager();
+			if (dbm.addUser(set)){
+				//if adduser successful, log in as added user and redirect
+				//back to start
+				System.out.println("Created user");
+				GetSet sets = new GetSet();
+				sets.setEmailAddress(email);
+				sets.setPassword(password);
+				try{
+					//call db manager and authenticate user, return value will be 0 or
+					//an integer indicating a role
+					LoginUser user = dbm.checkUser(sets);
+					System.out.println("Checked User");
+					if(user != null){
+						session = request.getSession();
+						System.out.println("Success");
+						session.setAttribute("user", user);
+						response.sendRedirect("index");
 					}
-					catch(Exception e){
-						System.out.println(e);
+					else{
+						//redirect back to login if authentication fails
+						//need to add a "invalid username or password" response
+						System.out.println("Wrong password?");
 						response.sendRedirect("login");
 					}
 				}
-				else{
-					//if unable to log in, add error message and redirect back to register
-					request.setAttribute("error","Unable to add user");
-					request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+				catch(Exception e){
+					System.out.println(e);
+					response.sendRedirect("login");
 				}
 			}
-			catch(Exception e){
-				System.out.println(e);
+			else{
+				//if unable to log in, add error message and redirect back to register
+				request.setAttribute("error","Unable to add user");
+				request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
 			}
 		}
-		else {
-			//if unable to log in, add error message and redirect back to register
-			request.setAttribute("error","Passwords do not match");
-			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+		catch(Exception e){
+			System.out.println(e);
 		}
 		
 	}
