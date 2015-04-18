@@ -8,11 +8,11 @@
   <div class="panel-heading">Panel heading</div>
   <div class="panel-body">
   	<h1>Ranges</h1>
-  	<h3></h3><p></p>
+  	<h3>high:</h3><p>The fist letter of the last name </p>
   	<br>
     <h3></h3><p></p>
   </div>
-  <!-- Table hi will!-->
+  <!-- Table -->
     
       <table class="table">
         <thead>
