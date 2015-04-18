@@ -5,16 +5,49 @@
 
 
 <div class="container">
-	<label for="drp_department"><font color="#e67e22" size="4">Select Department</label> 
+	<div class="row">
+    <div class="col-md-2">
+        <label for="drp_department"><font color="#e67e22" size="4">Department</label> 
 		<br>
 		<select id="drp_department" class="btn btn-default btn-lg dropdown-toggle">
+			<option value="select">Select</option>
 			<option value="CSE">CSE</option>
 			<option value="MAE">MAE</option>
 			<option value="ARCH">ARCH</option>
 			<option value="MATH">MATH</option>
 		</select> 
+
+    </div>
+    <div class="col-md-2">
+
+        <label for="drp_degreeType"><font color="#e67e22" size="4">Degree Type</font></label> 
+		<br>
+		<select id="drp_degreeType" class="btn btn-default btn-lg dropdown-toggle">
+			<option value="select">Select</option>
+			<option value="Bachelor">Bachelor</option>
+			<option value="Master">Master</option>
+			<option value="Doctorate">Doctorate</option>
+		</select> 
 		<br>
 
+    </div>
+    <div class="col-md-2">
+
+        <label for="drp_major"><font color="#e67e22" size="4">Major</font></label> 
+		<br>
+		<select id="drp_major" class="btn btn-default btn-lg dropdown-toggle">
+			<option value="select">Select</option>
+			<option value="Software Engineering">Software Engineering</option>
+			<option value="Computer Engineering">Computer Engineering</option>
+			<option value="Computer Science">Computer Science</option>
+		</select> 
+		<br>
+
+    </div>
+    
+    <div class="col-md-6"></div>
+    <br>
+	</div>
 	<div class="page-header">
 
 
@@ -49,8 +82,7 @@
 	</div>
 	<%} 
 		 else{%>
-	<label><font color="#e67e22" size="5"> Log in to see
-			Advisor schedules. </label>
+	<label><font color="#e67e22" size="5"> Log in to see Advisor schedules.</font></label>
 	<% } %>
 	<!-- end processing advisors -->
 
@@ -113,8 +145,8 @@
  												end:'<%=appointments.get(i-1).getAdvisingDate()+"T"+appointments.get(i-1).getAdvisingEndTime()%>',
  												id:<%=-i%>,
  												backgroundColor: 'orange'
- 											}
- 											<%if(i != appointments.size()){%>,<%}
+ 											}[
+ 											  <%if(i != appointments.size()){%>,<%}
  										}
 									}%>		 					 
 		 					 			]<%}%>
