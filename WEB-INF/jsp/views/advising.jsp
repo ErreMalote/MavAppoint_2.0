@@ -2,8 +2,16 @@
 
 <% ArrayList<String> array = (ArrayList<String>)session.getAttribute("advisors");
 	if (array != null){ %>
+	
+<% ArrayList<String> departments = (ArrayList<String>)session.getAttribute("departments");
+%>
 
-
+<% ArrayList<String> degreeType = (ArrayList<String>)session.getAttribute("degreeType");
+%>
+	
+<% ArrayList<String> major = (ArrayList<String>)session.getAttribute("major");
+%>
+	
 <div class="container">
 	<div class="row">
     <div class="col-md-2">
@@ -11,10 +19,14 @@
 		<br>
 		<select id="drp_department" class="btn btn-default btn-lg dropdown-toggle">
 			<option value="select">Select</option>
-			<option value="CSE">CSE</option>
-			<option value="MAE">MAE</option>
-			<option value="ARCH">ARCH</option>
-			<option value="MATH">MATH</option>
+			<%
+							for (int i=0;i<departments.size();i++){
+								
+								%>
+					<option value="option<%=i%>"><%=departments.get(i)%></option>
+					<%	}%>
+				</form>
+
 		</select> 
 
     </div>
@@ -24,9 +36,13 @@
 		<br>
 		<select id="drp_degreeType" class="btn btn-default btn-lg dropdown-toggle">
 			<option value="select">Select</option>
-			<option value="Bachelor">Bachelor</option>
-			<option value="Master">Master</option>
-			<option value="Doctorate">Doctorate</option>
+			<%
+							for (int i=0;i<degreeType.size();i++){
+								
+								%>
+					<option value="option<%=i%>"><%=degreeType.get(i)%></option>
+					<%	}%>
+				</form>
 		</select> 
 		<br>
 
@@ -37,9 +53,13 @@
 		<br>
 		<select id="drp_major" class="btn btn-default btn-lg dropdown-toggle">
 			<option value="select">Select</option>
-			<option value="Software Engineering">Software Engineering</option>
-			<option value="Computer Engineering">Computer Engineering</option>
-			<option value="Computer Science">Computer Science</option>
+				<%
+							for (int i=0;i<major.size();i++){
+								
+								%>
+					<option value="option<%=i%>"><%=major.get(i)%></option>
+					<%	}%>
+				</form>
 		</select> 
 		<br>
 

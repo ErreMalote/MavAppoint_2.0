@@ -30,6 +30,7 @@ import uta.mav.appoint.db.command.RegisterInitialStudent;
 import uta.mav.appoint.db.command.SQLCmd;
 import uta.mav.appoint.db.command.UpdateAppointment;
 import uta.mav.appoint.db.command.GetDepartmentStrings;
+import uta.mav.appoint.db.command.GetMajor;
 import uta.mav.appoint.flyweight.TimeSlotFlyweightFactory;
 import uta.mav.appoint.helpers.TimeSlotHelpers;
 import uta.mav.appoint.login.AdminUser;
@@ -472,5 +473,22 @@ public class RDBImpl implements DBImplInterface{
 		}
 		return arraylist;
 	}
+	
+	//using command pattern
+		public ArrayList<String> getMajor() throws SQLException{
+			ArrayList<String> arraylist = new ArrayList<String>();
+			try{
+				SQLCmd cmd = new GetMajor();
+				cmd.execute();
+				ArrayList<Object> tmp = cmd.getResult();
+				for (int i=0;i<tmp.size();i++){
+					arraylist.add(((String)tmp.get(i)));
+				}
+			}
+			catch(Exception sq){
+				System.out.printf(sq.toString());
+			}
+			return arraylist;
+		}
 }
 

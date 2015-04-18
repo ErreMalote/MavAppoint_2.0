@@ -45,12 +45,11 @@ public class AdvisingServlet extends HttpServlet{
 				DatabaseManager dbm = new DatabaseManager();
 				ArrayList<String> departments = dbm.getDepartmentStrings();
 				session.setAttribute("departments", departments);
-				/*
+				
 				//get majors from database
-				DatabaseManager dbm = new DatabaseManager();
 				ArrayList<String> major = dbm.getMajor();
 				session.setAttribute("major", major);
-				*/
+				
 				header = "templates/" + user.getHeader() + ".jsp";
 				//must be logged in to see advisor schedules - safety concern
 				ArrayList<String> array =  dbm.getAdvisors();

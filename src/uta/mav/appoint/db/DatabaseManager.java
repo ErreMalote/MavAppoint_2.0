@@ -91,5 +91,10 @@ public class DatabaseManager {
 	public ArrayList<String> getDepartmentStrings() throws SQLException{
 		return imp.getDepartmentStrings();
 	}
+	
+	public ArrayList<String> getMajor() throws SQLException{
+		return imp.getMajor();
+	}
+	
 }
 
