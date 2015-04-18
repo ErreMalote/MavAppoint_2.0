@@ -26,6 +26,12 @@ public class AdvisingServlet extends HttpServlet{
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ArrayList<String> departments = new ArrayList<>();
+		departments.add("CSE");
+		departments.add("MAE");
+		session.setAttribute("departments", departments);
+		
 		session = request.getSession();
 		LoginUser user = (LoginUser)session.getAttribute("user");
 		if (user == null){
