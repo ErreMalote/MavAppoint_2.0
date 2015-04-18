@@ -212,7 +212,8 @@ optgroup {
 
 table {
 	border-spacing: 0;
-	border-collapse: collapse
+	border-collapse: collapse;
+	color: #000000;
 }
 
 td, th {
