@@ -22,13 +22,15 @@ public class CreateInitialAdvisorSettings extends SQLCmd{
 	@Override
 	public void queryDB() {
 		try{
-			String command = "INSERT INTO User_Advisor (userid,pname,email,notification) "
-								+"values(?,?,?,?)";
+			String command = "INSERT INTO User_Advisor (userid,pname,notification,name_low,name_high,deg_types) "
+								+"values(?,?,?,?,?,?)";
 			PreparedStatement statement = conn.prepareStatement(command);
 			statement.setInt(1,userid);
 			statement.setString(2,pname);
-			statement.setString(3,email);
-			statement.setString(4,"Day");
+			statement.setString(3,"Day");
+			statement.setString(4,"A");
+			statement.setString(5,"Z");
+			statement.setInt(6,7);
 			statement.executeUpdate();
 			b = true;
 		}

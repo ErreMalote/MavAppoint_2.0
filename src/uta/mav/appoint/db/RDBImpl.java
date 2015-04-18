@@ -213,7 +213,8 @@ public class RDBImpl implements DBImplInterface{
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,Appointments.description,studentId,Appointments.student_email FROM USER,Appointments,User_Advisor "
+//			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,Appointments.description,studentId,Appointments.student_email FROM USER,Appointments,User_Advisor "
+					String command = "SELECT User_Advisor.pname,User.email,date,start,end,type,id,Appointments.description,studentId,Appointments.student_email FROM USER,Appointments,User_Advisor "
 						+ "WHERE USER.email=? AND user.userid=Appointments.advisor_userid AND User_Advisor.userid=Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			statement.setString(1, user.getEmail());
@@ -246,7 +247,8 @@ public class RDBImpl implements DBImplInterface{
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,description,student_email FROM USER,Appointments,User_Advisor "
+//			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id,description,student_email FROM USER,Appointments,User_Advisor "
+					String command = "SELECT User_Advisor.pname,User.email,date,start,end,type,id,description,student_email FROM USER,Appointments,User_Advisor "
 						+ "WHERE USER.email=? AND user.userid=Appointments.student_userid AND User_Advisor.userid=Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			statement.setString(1, user.getEmail());
@@ -279,7 +281,8 @@ public class RDBImpl implements DBImplInterface{
 		try{
 			Connection conn = this.connectDB();
 			PreparedStatement statement;
-			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id FROM Appointments INNER JOIN User_Advisor "
+//			String command = "SELECT User_Advisor.pname,User_Advisor.email,date,start,end,type,id FROM Appointments INNER JOIN User_Advisor "
+					String command = "SELECT User_Advisor.pname,User.email,date,start,end,type,id FROM Appointments INNER JOIN User_Advisor "
 						+"WHERE User_Advisor.userid = Appointments.advisor_userid";
 			statement = conn.prepareStatement(command);
 			ResultSet rs = statement.executeQuery();
