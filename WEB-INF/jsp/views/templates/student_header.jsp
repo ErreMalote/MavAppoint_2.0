@@ -10,9 +10,8 @@
 	<ul class="nav navbar-nav navbar-right">
 		<li><a href="#"><font style="color: #e67e22" size="3">
 					You are logged in as a Student. </font></a></li>
-		<li><a href="logout"><font style="color: #e67e22" size="5">
-					<span class="glyphicon glyphicon-log-in">
-			</font></a></li>
+		<li><a href="logout"><span class="glyphicon glyphicon-log-in"><font
+					style="color: #e67e22">Logout</font></a></li>
 	</ul>
 </div>
 </div>

@@ -11,7 +11,6 @@ import uta.mav.appoint.beans.AppointmentType;
 import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
 import uta.mav.appoint.beans.RegisterBean;
-import uta.mav.appoint.db.command.Register;
 import uta.mav.appoint.login.AdminUser;
 import uta.mav.appoint.login.AdvisorUser;
 import uta.mav.appoint.login.LoginUser;

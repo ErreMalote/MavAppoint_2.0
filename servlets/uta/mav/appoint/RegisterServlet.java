@@ -1,5 +1,4 @@
 package uta.mav.appoint;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +46,12 @@ public class RegisterServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
 		}
 		password = request.getParameter("password");
+		if(password.length()<6)
+		{
+			System.out.println("Unsecure Password");
+			request.setAttribute("error","Unable to add user");
+			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
+		}
 		rpassword = request.getParameter("repeatPassword");
 		if(!password.equals(rpassword))
 		{
