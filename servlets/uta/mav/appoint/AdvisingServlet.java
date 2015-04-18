@@ -29,23 +29,28 @@ public class AdvisingServlet extends HttpServlet{
 		
 		session = request.getSession(); // comment
 
+		ArrayList<String> degreeType = new ArrayList<>();
+		degreeType.add("Bachelor");
+		degreeType.add("Master");
+		degreeType.add("Doctorate");
+		session.setAttribute("degreeType", degreeType);
+		
 		LoginUser user = (LoginUser)session.getAttribute("user");
 		if (user == null){
 			user = new LoginUser();
 			session.setAttribute("user", user);
 		}
 		try{
+			//get departments from database
 				DatabaseManager dbm = new DatabaseManager();
 				ArrayList<String> departments = dbm.getDepartmentStrings();
-				System.out.println(departments.get(0));
 				session.setAttribute("departments", departments);
-				
-				ArrayList<String> degreeType = new ArrayList<>();
-				departments.add("Bachelor");
-				departments.add("Master");
-				departments.add("Doctorate");
-				session.setAttribute("degreeType", degreeType);
-				
+				/*
+				//get majors from database
+				DatabaseManager dbm = new DatabaseManager();
+				ArrayList<String> major = dbm.getMajor();
+				session.setAttribute("major", major);
+				*/
 				header = "templates/" + user.getHeader() + ".jsp";
 				//must be logged in to see advisor schedules - safety concern
 				ArrayList<String> array =  dbm.getAdvisors();
