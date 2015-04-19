@@ -5,14 +5,13 @@
 <!-- Panel -->
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
+  <div class="panel-heading"><h1>Assign Students To Advisors</h1></div>
   <div class="panel-body">
-  	<h1>Ranges</h1>
-  	<h3></h3><p></p>
-  	<br>
-    <h3></h3><p></p>
+  	<h2>Ranges - Uses the first letter of the last name</h2>
+  	<h4>Low - low end of range </h4>
+    <h4>High - High end of the range </h4>
   </div>
-  <!-- Table hi will!-->
+  <!-- Table -->
     
       <table class="table">
         <thead>
@@ -25,18 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Anna</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Debbie</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>John</td>
-          </tr>
+          
         </tbody>
       </table>
     </div>
