@@ -15,7 +15,7 @@ public class Email {
 	private String toEmail;
 	public Email(String sub, String txt, String destEmail)
 	{
-		subject = sub; // that's a subject
+		subject = sub;
 		text = txt;
 		toEmail = destEmail;
 	}
