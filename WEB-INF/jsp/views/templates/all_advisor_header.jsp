@@ -5,6 +5,7 @@
 					Update Schedule</font> </a></li>
 		<li><a href="appointments"><font style="color: #e67e22">
 					Appointments</font> </a></li>
+		<li><a href="advising"><font style="color: #e67e22">
+					Show Schedule </font></a></li>
 		<li><a href="customize"><font style="color: #e67e22">Customize
 					Settings</font></a></li>
-	
