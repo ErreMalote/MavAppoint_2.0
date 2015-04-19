@@ -3,6 +3,7 @@ package uta.mav.appoint.db.command;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import uta.mav.appoint.db.DatabaseManager;
 import uta.mav.appoint.login.AdminUser;
 import uta.mav.appoint.login.AdvisorUser;
 import uta.mav.appoint.login.LeadAdvisorUser;
@@ -50,10 +51,8 @@ public class CheckUser extends SQLCmd{
 			while(res.next()){
 				if (!(res.getInt(1) == 0)){
 					if (res.getString(2).toLowerCase().equals("advisor")){
-						user = new AdvisorUser(email,pname);
-					}
-					else if (res.getString(2).toLowerCase().equals("lead_advisor")){
-						user = new LeadAdvisorUser(email,pname);
+						DatabaseManager databaseManager = new DatabaseManager();
+						user = databaseManager.getAdvisor(email);
 					}
 					else if (res.getString(2).toLowerCase().equals("student")){
 						user = new StudentUser(email);

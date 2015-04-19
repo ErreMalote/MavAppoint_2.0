@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 		GetSet sets = new GetSet();
 		sets.setEmailAddress(emailAddress);
 		sets.setPassword(password);
+		
 		try{
 			//call db manager and authenticate user, return value will be 0 or
 			//an integer indicating a role

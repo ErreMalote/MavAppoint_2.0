@@ -25,6 +25,7 @@ public interface DBImplInterface {
 	public ArrayList<TimeSlotComponent> getAdvisorSchedule(String name) throws SQLException;
 	public Boolean addUser(RegisterBean registerBean) throws SQLException;
 	public ArrayList<String> getAdvisors() throws SQLException;
+	public AdvisorUser getAdvisor(String email) throws SQLException;
 	public LoginUser checkUser(GetSet set) throws SQLException;
 	public String addTimeSlot(AllocateTime at) throws SQLException;
 	public Connection connectDB();

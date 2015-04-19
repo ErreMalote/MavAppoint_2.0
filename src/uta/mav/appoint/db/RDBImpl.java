@@ -15,28 +15,10 @@ import uta.mav.appoint.beans.AppointmentType;
 import uta.mav.appoint.beans.CreateAdvisorBean;
 import uta.mav.appoint.beans.GetSet;
 import uta.mav.appoint.beans.RegisterBean;
-import uta.mav.appoint.db.command.AddAppointmentType;
-import uta.mav.appoint.db.command.AddTimeSlot;
-import uta.mav.appoint.db.command.CheckTimeSlot;
-import uta.mav.appoint.db.command.CheckUser;
-import uta.mav.appoint.db.command.CreateAdvisor;
-import uta.mav.appoint.db.command.CreateInitialAdvisorSettings;
-import uta.mav.appoint.db.command.DeleteTimeSlot;
-import uta.mav.appoint.db.command.GetAdvisors;
-import uta.mav.appoint.db.command.GetAppointment;
-import uta.mav.appoint.db.command.GetUserID;
-import uta.mav.appoint.db.command.Register;
-import uta.mav.appoint.db.command.RegisterInitialStudent;
-import uta.mav.appoint.db.command.SQLCmd;
-import uta.mav.appoint.db.command.UpdateAppointment;
-import uta.mav.appoint.db.command.GetDepartmentStrings;
-import uta.mav.appoint.db.command.GetMajor;
+import uta.mav.appoint.db.command.*;
 import uta.mav.appoint.flyweight.TimeSlotFlyweightFactory;
 import uta.mav.appoint.helpers.TimeSlotHelpers;
-import uta.mav.appoint.login.AdminUser;
-import uta.mav.appoint.login.AdvisorUser;
-import uta.mav.appoint.login.LoginUser;
-import uta.mav.appoint.login.StudentUser;
+import uta.mav.appoint.login.*;
 
 public class RDBImpl implements DBImplInterface{
 
@@ -379,6 +361,37 @@ public class RDBImpl implements DBImplInterface{
 		}
 	}
 	
+	public AdvisorUser getAdvisor(String email){
+		SQLCmd cmd = new GetAdvisor(email);
+		cmd.execute();
+		AdvisorUser advisorUser = new AdvisorUser(email);
+		System.out.println(cmd.getResult().toString());
+		int i=0;
+		advisorUser.setPassword((String)cmd.getResult().get(i));
+		i++;
+		advisorUser.setValidated(Integer.valueOf((String)cmd.getResult().get(i)));
+		i++;
+		advisorUser.setPname((String)cmd.getResult().get(i));
+		i++;
+		advisorUser.setNameLow((String)cmd.getResult().get(i));
+		i++;
+		advisorUser.setNameHigh((String)cmd.getResult().get(i));
+		i++;
+		advisorUser.setDegType(Integer.valueOf((String)cmd.getResult().get(i)));
+		i++;
+		advisorUser.setIsLead(Integer.valueOf((String)cmd.getResult().get(i)));
+		i++;
+		advisorUser.setDept((String)cmd.getResult().get(i));
+		i++;
+		ArrayList<String> majors = new ArrayList<String>();
+		for(int j=i; j<cmd.getResult().size(); j++)
+		{
+			majors.add((String)cmd.getResult().get(j));
+		}
+		advisorUser.setMajors(majors);
+		return advisorUser;
+	}
+	
 	public ArrayList<AppointmentType> getAppointmentTypes(String pname){
 			ArrayList<AppointmentType> ats = new ArrayList<AppointmentType>();
 			try{
@@ -428,24 +441,24 @@ public class RDBImpl implements DBImplInterface{
 	}
 	
 	public Boolean createAdvisor(CreateAdvisorBean ca){
-	try{
-		SQLCmd cmd = new CreateAdvisor(ca);
-		cmd.execute();
-		if ((Boolean)cmd.getResult().get(0)){
-			cmd = new GetUserID(ca.getEmail());
+		try{
+			SQLCmd cmd = new CreateAdvisor(ca);
 			cmd.execute();
-			cmd = new CreateInitialAdvisorSettings((int)cmd.getResult().get(0),ca);
-			cmd.execute();
-			return (Boolean)cmd.getResult().get(0);
+			if ((Boolean)cmd.getResult().get(0)){
+				cmd = new GetUserID(ca.getEmail());
+				cmd.execute();
+				cmd = new CreateInitialAdvisorSettings((int)cmd.getResult().get(0),ca);
+				cmd.execute();
+				return (Boolean)cmd.getResult().get(0);
+			}
+			else{
+				return false;
+			}
+				
 		}
-		else{
+		catch(Exception e){
 			return false;
 		}
-			
-	}
-	catch(Exception e){
-		return false;
-	}
 	}
 	
 	public String addAppointmentType(AdvisorUser user, AppointmentType at){

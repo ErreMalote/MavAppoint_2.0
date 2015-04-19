@@ -4,16 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import uta.mav.appoint.TimeSlotComponent;
-import uta.mav.appoint.beans.AllocateTime;
-import uta.mav.appoint.beans.Appointment;
-import uta.mav.appoint.beans.AppointmentType;
-import uta.mav.appoint.beans.CreateAdvisorBean;
-import uta.mav.appoint.beans.GetSet;
-import uta.mav.appoint.beans.RegisterBean;
-import uta.mav.appoint.login.AdminUser;
-import uta.mav.appoint.login.AdvisorUser;
-import uta.mav.appoint.login.LoginUser;
-import uta.mav.appoint.login.StudentUser;
+import uta.mav.appoint.beans.*;
+import uta.mav.appoint.login.*;
 
 
 public class DatabaseManager {
@@ -36,6 +28,10 @@ public class DatabaseManager {
 	
 	public ArrayList<String> getAdvisors() throws SQLException{
 		return imp.getAdvisors();
+	}
+
+	public AdvisorUser getAdvisor(String email) throws SQLException{
+		return imp.getAdvisor(email);
 	}
 	
 	public ArrayList<TimeSlotComponent> getAdvisorSchedule(String name) throws SQLException{
