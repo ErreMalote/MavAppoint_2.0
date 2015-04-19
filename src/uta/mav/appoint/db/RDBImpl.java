@@ -97,6 +97,17 @@ public class RDBImpl implements DBImplInterface{
 		}
 	}
 	
+	public ArrayList<AdvisorUser> getFullAdvisor() throws SQLException{
+		ArrayList<AdvisorUser> arraylist = new ArrayList<>();
+		try{
+			
+		}
+		catch(Exception sq){
+			System.out.printf(sq.toString());
+		}
+		return arraylist;
+	}
+	
 	//using command pattern
 	public ArrayList<String> getAdvisors() throws SQLException{
 		ArrayList<String> arraylist = new ArrayList<String>();

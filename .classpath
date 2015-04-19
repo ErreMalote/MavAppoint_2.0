@@ -53,7 +53,11 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_40">
+>>>>>>> 205c7bfc6595c926aba03b25aa51a2d9a44097ed
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>

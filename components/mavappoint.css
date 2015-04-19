@@ -4,10 +4,24 @@ body {
 	background: url(../img/engineering.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
+	color: #000000
+	
 }
 
 .brand {
 	background: url(../img/mavlogo.gif) no-repeat left center;
 	height: 20px;
 	width: 20px;
+}
+h1 {
+	color: #e67e22;
+}
+h2 {
+	color: #666666;
+}
+h3 {
+	color: #000000
+}
+h4 {
+	color: #000000
 }
