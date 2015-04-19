@@ -4,7 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import uta.mav.appoint.db.DatabaseManager;
-import uta.mav.appoint.login.*;
+import uta.mav.appoint.login.AdminUser;
+import uta.mav.appoint.login.AdvisorUser;
+import uta.mav.appoint.login.LeadAdvisorUser;
+import uta.mav.appoint.login.FacultyUser;
+import uta.mav.appoint.login.LoginUser;
+import uta.mav.appoint.login.StudentUser;
 
 public class CheckUser extends SQLCmd{
 	String email;
