@@ -1,4 +1,5 @@
 <jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
+<%@ page import="java.util.ArrayList"%>
 
 <% ArrayList<String> array = (ArrayList<String>)session.getAttribute("advisors");
 	if (array != null){ %>
@@ -76,7 +77,6 @@
 			<div class="btn-group">
 				<form action="advising" method="post" name="advisor_form">
 					<input type=hidden name=advisor_button id="advisor_button">
-					<%@ page import="java.util.ArrayList"%>
 
 					<!-- begin processing advisors  -->
 					<button type="button" id="all1" onclick="alladvisors()">All</button>
