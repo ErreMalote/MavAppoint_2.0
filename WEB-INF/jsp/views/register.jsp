@@ -1,38 +1,58 @@
-<%@include file="templates/header.jsp"%>
+<jsp:include page='<%=(String) request.getAttribute("includeHeader")%>' />
+<%@ page import="java.util.ArrayList"%>
+
+<%
+ ArrayList<String> departments = (ArrayList<String>)session.getAttribute("departments");
+ ArrayList<String> degreeType = (ArrayList<String>)session.getAttribute("degreeType");
+ ArrayList<String> major = (ArrayList<String>)session.getAttribute("major");
+%>
 <div class="container">
 	<form action="#" method="post">
 		<div class="row">
 			<div class="col-md-4 col-lg-4">
 				<div class="form-group">
-					
-					<label for="degree_type"><font color="#e67e22" size="4">Degree Type</label> 
+				
+			        <label for="drp_department"><font color="#e67e22" size="4">Department</label> 
 					<br>
-					<select name="degree_type" class="btn btn-default btn-lg dropdown-toggle">
-						<option value=1>Bachelors</option>
-						<option value=2>Masters</option>
-						<option value=3>Doctorate</option>
-					</select>
-					<br>
-					
-					<label for="departments"><font color="#e67e22" size="4">Departments</label> 
-					<br>
-					<select name="departments" class="btn btn-default btn-lg dropdown-toggle">
-						<option value="CSE">CSE</option>
-						<option value="MAE">MAE</option>
-						<option value="ARCH">ARCH</option>
-						<option value="MATH">MATH</option>
-					</select>
+					<select id="drp_department" name="drp_department" class="btn btn-default btn-lg dropdown-toggle">
+						<option value="select">Select</option>
+						<%
+										for (int i=0;i<departments.size();i++){
+											
+											%>
+								<option value=<%=departments.get(i)%>><%=departments.get(i)%></option>
+								<%	}%>
+							</form>
+			
+					</select> 
 					<br>
 					
-					<label for="degrees"><font color="#e67e22" size="4">Degrees</label> 
+			        <label for="drp_degreeType"><font color="#e67e22" size="4">Degree Type</font></label> 
 					<br>
-					<select name="degrees" class="btn btn-default btn-lg dropdown-toggle">
-						<option value="Software Engineering">Software Engineering</option>
-						<option value="Computer Engineering">Computer Engineering</option>
-						<option value="Computer Science">Computer Science</option>
-						<option value="Mechanical Engineering">Mechanical Engineering</option>
-						<option value="Aerospace Engineering">Aerospace Engineering</option>
-					</select>
+					<select id="drp_degreeType" name="drp_degreeType" class="btn btn-default btn-lg dropdown-toggle">
+						<option value="select">Select</option>
+						<%
+										for (int i=0, j=1;i<degreeType.size();i++, j*=2){
+											
+											%>
+								<option value=<%=j%>><%=degreeType.get(i)%></option>
+								<%	}%>
+							</form>
+					</select> 
+					<br>
+			
+			        <label for="drp_major"><font color="#e67e22" size="4">Major</font></label> 
+					<br>
+					<select id="drp_major" name="drp_major" class="btn btn-default btn-lg dropdown-toggle">
+						<option value="select">Select</option>
+							<%
+										for (int i=0;i<major.size();i++){
+											
+											%>
+								<option value=<%=major.get(i)%>><%=major.get(i)%></option>
+								<%	}%>
+							</form>
+					</select> 
 					<br>
 					
 					<label for="student_Id"><font color="#e67e22" size="4">Student ID</label> 
