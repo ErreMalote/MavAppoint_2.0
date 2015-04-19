@@ -20,7 +20,7 @@ public class CreateAdvisorVisitor extends Visitor{
 			else{
 				user.setMsg("Error: Cannot create account.");
 			}
-		}
+		} 
 		catch(Exception e){
 			user.setMsg("Unable to create advisor..");
 		}
