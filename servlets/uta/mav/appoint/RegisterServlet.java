@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		session = request.getSession(); // comment
+		session = request.getSession();
 
 		ArrayList<String> degreeType = new ArrayList<>();
 		degreeType.add("Bachelor");
@@ -95,15 +95,10 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("error","Unable to add user");
 				request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request,response);
 			}
-			System.out.println("HERE");
+			
 			student_Id = Integer.valueOf(request.getParameter("student_Id"));
 
-			System.out.println("Not HERE");
-			System.out.println(request.getParameter("drp_department"));
-			System.out.println(request.getParameter("drp_degreeType"));
 			degree_type = Integer.valueOf(request.getParameter("drp_degreeType"));
-
-			System.out.println("OR HERE");
 			
 			departments = new ArrayList<String> (Arrays.asList(request.getParameter("drp_department")));
 			majors = new ArrayList<String> (Arrays.asList(request.getParameter("drp_major")));
@@ -143,10 +138,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 		}
 		catch(Exception e){
-			System.out.println(e);
+			System.out.println(e+"RegisterServlet");
 		}
 		if(!success){
-			System.out.println("HUH?");
+			System.out.println("Couldn't Log In");
 			//if unable to log in, add error message and redirect back to register
 			request.setAttribute("includeHeader", "templates/header.jsp");
 			request.getRequestDispatcher("/WEB-INF/jsp/views/register.jsp").forward(request, response);
