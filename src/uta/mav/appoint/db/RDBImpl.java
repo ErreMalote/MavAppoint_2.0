@@ -451,21 +451,32 @@ public class RDBImpl implements DBImplInterface{
 		return app;
 	}
 	
-	public Boolean createAdvisor(CreateAdvisorBean ca){
+	public Integer createUser(String email, String password, String role){
+		Integer userId = -1;
 		try{
-			SQLCmd cmd = new CreateAdvisor(ca);
+			SQLCmd cmd = new CreateUser(email, password, role);
 			cmd.execute();
 			if ((Boolean)cmd.getResult().get(0)){
-				cmd = new GetUserID(ca.getEmail());
+				cmd = new GetUserID(email);
 				cmd.execute();
-				cmd = new CreateInitialAdvisorSettings((int)cmd.getResult().get(0),ca);
-				cmd.execute();
-				return (Boolean)cmd.getResult().get(0);
+				userId = (int)cmd.getResult().get(0);
 			}
 			else{
-				return false;
+				System.out.println("User not created"+"RDBImpl");
 			}
-				
+		}
+		catch(Exception e){
+			System.out.println(e+"RDBImpl");
+		}
+
+		return userId;
+	}
+	
+	public Boolean createAdvisor(Integer userId, String pname, String name_low, String name_high, Integer degree_types, Integer lead_status){
+		try{
+			SQLCmd cmd = new CreateAdvisor(userId, pname, name_low, name_high, degree_types, lead_status);
+			cmd.execute();
+				return (Boolean)cmd.getResult().get(0);
 		}
 		catch(Exception e){
 			return false;
@@ -499,20 +510,20 @@ public class RDBImpl implements DBImplInterface{
 	}
 	
 	//using command pattern
-		public ArrayList<String> getMajor() throws SQLException{
-			ArrayList<String> arraylist = new ArrayList<String>();
-			try{
-				SQLCmd cmd = new GetMajor();
-				cmd.execute();
-				ArrayList<Object> tmp = cmd.getResult();
-				for (int i=0;i<tmp.size();i++){
-					arraylist.add(((String)tmp.get(i)));
-				}
+	public ArrayList<String> getMajor() throws SQLException{
+		ArrayList<String> arraylist = new ArrayList<String>();
+		try{
+			SQLCmd cmd = new GetMajor();
+			cmd.execute();
+			ArrayList<Object> tmp = cmd.getResult();
+			for (int i=0;i<tmp.size();i++){
+				arraylist.add(((String)tmp.get(i)));
 			}
-			catch(Exception sq){
-				System.out.printf(sq.toString());
-			}
-			return arraylist;
 		}
+		catch(Exception sq){
+			System.out.printf(sq.toString());
+		}
+		return arraylist;
+	}
 }
 

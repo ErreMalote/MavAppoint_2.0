@@ -19,8 +19,8 @@
 		<div>
 			<label for="isLead"><font color="#e67e22">Lead Advisor</label><br>
 			<select id="isLead" class="btn btn-default btn-lg dropdown-toggle">
-				<option value="True">True</option>
-				<option value="False">False</option>
+				<option value=1>True</option>
+				<option value=2>False</option>
 			</select> <br>
 		</div>
 

@@ -1,47 +1,56 @@
 package uta.mav.appoint.db.command;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import uta.mav.appoint.beans.CreateAdvisorBean;
 
 public class CreateAdvisor extends SQLCmd{
-	
-	String email;
-	String password;
-	String role;
+
+	Integer userId;
 	String pname;
+	String name_low;
+	String name_high;
+	Integer degree_types;
+	Integer lead_status;
 	Boolean b;
 	
-	public CreateAdvisor(CreateAdvisorBean ca){
-		email = ca.getEmail();
-		password = ca.getPassword();
-		pname = ca.getPname();
-		role = ca.getRole();
+	public CreateAdvisor(Integer userId, String pname, String name_low, String name_high, Integer degree_types, Integer lead_status){
+		this.userId = userId;
+		this.pname = pname;
+		this.name_low = name_low;
+		this.name_high = name_high;
+		this.degree_types = degree_types;
+		this.lead_status = lead_status;
+		
 		b = false;
 	}
 	
 	@Override
 	public void queryDB() {
 		try{
-			String command = "INSERT INTO user (email,password,role,validated)"
-							+" values(?,?,?,?)";
+			String command = "INSERT INTO User_Advisor (userid,pname,notification,name_low,name_high,degree_types,lead_status) "
+								+"values(?,?,?,?,?,?,?)";
 			PreparedStatement statement = conn.prepareStatement(command);
-			statement.setString(1,email);
-			statement.setString(2,"newadvisor!@3");
-			statement.setString(3,role);
-			statement.setInt(4,1);
+			statement.setInt(1,userId);
+			statement.setString(2,pname);
+			statement.setString(3,"Day");
+			statement.setString(4,name_low);
+			statement.setString(5,name_high);
+			statement.setInt(6,degree_types);
+			statement.setInt(7,lead_status);
 			statement.executeUpdate();
 			b = true;
-			}
-		catch(Exception e){
-			System.out.println(e);
 		}
+		catch(SQLException sqe){
+			System.out.println(sqe.toString());
+		}
+		
 	}
 
 	@Override
 	public void processResult() {
-		result.add(b);	
+		result.add(b);
 	}
 
-		
 }

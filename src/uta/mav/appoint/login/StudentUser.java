@@ -10,6 +10,10 @@ public class StudentUser extends LoginUser{
 	public StudentUser(String em){
 		super(em);
 	}
+	
+	public StudentUser(){
+		super();
+	}
 
 	@Override
 	public String getHeader(){

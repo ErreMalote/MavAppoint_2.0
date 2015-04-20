@@ -3,6 +3,7 @@ package uta.mav.appoint.login;
 import java.util.ArrayList;
 
 import uta.mav.appoint.beans.AllocateTime;
+import uta.mav.appoint.db.DatabaseManager;
 import uta.mav.appoint.visitor.Visitor;
 
 /**
@@ -10,7 +11,6 @@ import uta.mav.appoint.visitor.Visitor;
  *
  */
 public class AdvisorUser extends LoginUser{
-	private String password;
 	private String pname;
 	private String dept;
 	private ArrayList<String> majors;
@@ -18,7 +18,24 @@ public class AdvisorUser extends LoginUser{
 	private String nameHigh;
 	private Integer degType;
 	private Integer isLead;
-	private Integer validated;
+	
+	public AdvisorUser(String email, String password, String pname, String name_low, String name_high, Integer degree_types, Integer lead_status){
+		super(email,password,"advisor");
+		this.pname = pname;
+		this.nameLow = name_low;
+		this.nameHigh = name_high;
+		this.degType = degree_types;
+		this.isLead = lead_status;
+		
+		try
+		{
+			DatabaseManager databaseManager = new DatabaseManager();
+			databaseManager.createAdvisor(getUserId(), pname, name_low, name_high, degree_types, lead_status);
+		} catch (Exception e){
+			System.out.println(e+"AdvisorUser");
+		}
+
+	}
 	
 	public AdvisorUser(String em, String p){
 		super(em);
@@ -55,24 +72,6 @@ public class AdvisorUser extends LoginUser{
 	@Override
 	public ArrayList<Object> accept(Visitor v, Object o){//allow javabean to be passed in
 		return v.check(this,o);
-	}
-	
-	
-
-	public int getValidated() {
-		return validated;
-	}
-
-	public void setValidated(int validated) {
-		this.validated = validated;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getDept() {
