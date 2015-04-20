@@ -9,18 +9,15 @@ import uta.mav.appoint.login.*;
 
 
 public class DatabaseManager {
-		DBImplInterface imp = new RDBImpl();
+	private DBImplInterface imp = new RDBImpl();
 	
-			
-	//user login checking, check username and password against database
-	//then return role if a match is found
-	public Boolean createAdvisor(CreateAdvisorBean ca) throws SQLException{
-		return imp.createAdvisor(ca);
+	public Integer createUser(String email, String password, String role) throws SQLException{
+		return imp.createUser(email, password, role);
 	}
 		
 	public LoginUser checkUser(GetSet set) throws SQLException{
 		return imp.checkUser(set);
-		}
+	}
 	
 	public Boolean addUser(RegisterBean registerBean) throws SQLException{
 		return imp.addUser(registerBean);
@@ -90,6 +87,10 @@ public class DatabaseManager {
 	
 	public ArrayList<String> getMajor() throws SQLException{
 		return imp.getMajor();
+	}
+	
+	public Boolean createAdvisor(Integer userId, String pname, String name_low, String name_high, Integer degree_types, Integer lead_status) throws SQLException{
+		return imp.createAdvisor(userId, pname, name_low, name_high, degree_types, lead_status);
 	}
 	
 }

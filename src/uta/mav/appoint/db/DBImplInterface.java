@@ -33,9 +33,10 @@ public interface DBImplInterface {
 	public Boolean updateAppointment(Appointment a);
 	public Boolean deleteTimeSlot(AllocateTime at) throws SQLException;
 	public Appointment getAppointment(String d, String e) throws SQLException;
-	public Boolean createAdvisor(CreateAdvisorBean ca) throws SQLException;	
 	public String addAppointmentType(AdvisorUser user, AppointmentType at) throws SQLException;
 	public ArrayList<String> getDepartmentStrings() throws SQLException;
 	public ArrayList<String> getMajor() throws SQLException;
 	public ArrayList<AdvisorUser> getFullAdvisor() throws SQLException;
+	public Integer createUser(String email, String password, String role) throws SQLException;
+	public Boolean createAdvisor(Integer userId, String pname, String name_low, String name_high, Integer degree_types, Integer lead_status) throws SQLException;
 }
